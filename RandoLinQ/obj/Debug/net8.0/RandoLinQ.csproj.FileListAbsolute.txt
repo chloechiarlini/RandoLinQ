@@ -15,4 +15,5 @@ C:\Users\queen\source\repos\RandoLinQ\RandoLinQ\obj\Debug\net8.0\refint\RandoLin
 C:\Users\queen\source\repos\RandoLinQ\RandoLinQ\obj\Debug\net8.0\RandoLinQ.pdb
 C:\Users\queen\source\repos\RandoLinQ\RandoLinQ\obj\Debug\net8.0\RandoLinQ.genruntimeconfig.cache
 C:\Users\queen\source\repos\RandoLinQ\RandoLinQ\obj\Debug\net8.0\ref\RandoLinQ.dll
-C:\Users\queen\source\repos\RandoLinQ\RandoLinQ\bin\Debug\net8.0\Json\randonnees-velos.json
+C:\Users\queen\Source\Repos\RandoLinQ\RandoLinQ\obj\Debug\net8.0\RandoLinQ.sourcelink.json
+C:\Users\queen\Source\Repos\RandoLinQ\RandoLinQ\bin\Debug\net8.0\Data\randonnees-velos.json

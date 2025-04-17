@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RandoLinQ")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a1896c7f26c376c1553898398294e60da1f436d7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b64fd8952732146d844543950366a3ea4c32845c")]
 [assembly: System.Reflection.AssemblyProductAttribute("RandoLinQ")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RandoLinQ")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
