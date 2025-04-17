@@ -1,0 +1,55 @@
+# Fichiers de build
+bin/
+obj/
+
+# Fichiers de l'IDE
+.vs/
+.vscode/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Fichiers de compilation
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+
+# Fichiers de déploiement
+*.zip
+*.tar.gz
+*.rar
+
+# Fichiers de configuration personnelle
+appsettings.Development.json
+appsettings.Local.json
+
+# Fichiers de base de données
+*.mdf
+*.ldf
+*.ndf
+
+# Fichiers temporaires
+*.swp
+*.*~
+*.tmp
+*.bak
+*.cache
+
+# Fichiers de packages NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# Fichiers de test
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Fichiers de couverture de code
+coverage.json
+coverage.info
+coverage.xml 
