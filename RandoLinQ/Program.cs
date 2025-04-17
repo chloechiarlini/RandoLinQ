@@ -56,7 +56,7 @@ while (true)
 
 void ListerToutesLesRandos()
 {
-    Console.WriteLine("=== Toutes les randonnées ===\n");
+    Console.WriteLine("=== Toutes les randonnées ===");
     foreach (var r in randos)
     {
         Console.WriteLine($"{r.nom} - {r.distance_km} km - Difficulté : {r.difficulte}");
@@ -70,11 +70,11 @@ void RechercherParDifficulte()
     Console.Write("Entrez la difficulté à rechercher (ex: *, **, ***, Facile, Moyen, Difficile) : ");
     string? diff = Console.ReadLine()?.Trim();
 
-    var resultats = randos
-        .Where(r => string.Equals(r.difficulte, diff, StringComparison.OrdinalIgnoreCase))
-        .ToList();
+    var resultats = (from r in randos
+                     where string.Equals(r.difficulte, diff, StringComparison.OrdinalIgnoreCase)
+                     select r).ToList();
 
-    Console.WriteLine($"\nRandonnées avec difficulté \"{diff}\" :\n");
+    Console.WriteLine($"Randonnées avec difficulté \"{diff}\" : ");
 
     if (!resultats.Any())
     {
@@ -91,9 +91,11 @@ void RechercherParDifficulte()
 
 void AfficherRandosLongues()
 {
-    var longues = randos.Where(r => r.distance_km > 20).ToList();
+    var longues = (from r in randos
+                   where r.distance_km > 20
+                   select r).ToList();
 
-    Console.WriteLine("=== Randonnées de plus de 20 km ===\n");
+    Console.WriteLine("=== Randonnées de plus de 20 km === ");
     foreach (var r in longues)
         Console.WriteLine($"{r.nom} - {r.distance_km} km");
 
@@ -102,9 +104,11 @@ void AfficherRandosLongues()
 
 void TrierParDistance()
 {
-    var tri = randos.OrderBy(r => r.distance_km).ToList();
+    var tri = (from r in randos
+               orderby r.distance_km
+               select r).ToList();
 
-    Console.WriteLine("=== Randonnées triées par distance (croissante) ===\n");
+    Console.WriteLine("=== Randonnées triées par distance (croissante) === ");
     foreach (var r in tri)
         Console.WriteLine($"{r.nom} - {r.distance_km} km");
 
@@ -113,11 +117,12 @@ void TrierParDistance()
 
 void GrouperParDifficulte()
 {
-    var groupes = randos
-        .GroupBy(r => r.difficulte)
-        .OrderBy(g => g.Key);
+    var groupes = from r in randos
+                  group r by r.difficulte into g
+                  orderby g.Key
+                  select g;
 
-    Console.WriteLine("=== Groupement par difficulté ===\n");
+    Console.WriteLine("=== Groupement par difficulté === ");
     foreach (var g in groupes)
     {
         Console.WriteLine($"Difficulté : {g.Key} ({g.Count()} randos)");
@@ -126,7 +131,9 @@ void GrouperParDifficulte()
         Console.WriteLine();
     }
 
-    var liste = groupes.SelectMany(g => g).ToList();
+    var liste = (from g in groupes
+                 from r in g
+                 select r).ToList();
     DemanderExport(liste);
 }
 
@@ -151,48 +158,74 @@ void DemanderExport(List<Trek> liste)
 
 void ProposerExport(List<Trek> liste)
 {
-    Console.WriteLine("\nQuels champs voulez-vous inclure dans l’export ?");
-    Console.WriteLine("Tapez oui/non pour chaque champ :");
-
-    Console.Write("Inclure le nom ? (oui/non) : ");
-    bool inclNom = Console.ReadLine()?.Trim().ToLower() == "oui";
-
-    Console.Write("Inclure la distance (km) ? (oui/non) : ");
-    bool inclDistance = Console.ReadLine()?.Trim().ToLower() == "oui";
-
-    Console.Write("Inclure la difficulté ? (oui/non) : ");
-    bool inclDifficulte = Console.ReadLine()?.Trim().ToLower() == "oui";
-
-    Console.Write("Inclure les coordonnées ? (oui/non) : ");
-    bool inclCoord = Console.ReadLine()?.Trim().ToLower() == "oui";
-
-    string fileName = $"export-{DateTime.Now:yyyyMMdd-HHmmss}.csv";
-    string exportPath = Path.Combine(Directory.GetCurrentDirectory(), "Exports");
-
-    Directory.CreateDirectory(exportPath);
-    string fullPath = Path.Combine(exportPath, fileName);
-
-    using (var writer = new StreamWriter(fullPath))
+    try
     {
-        var header = new List<string>();
-        if (inclNom) header.Add("Nom");
-        if (inclDistance) header.Add("Distance_km");
-        if (inclDifficulte) header.Add("Difficulté");
-        if (inclCoord) header.Add("Latitude,Longitude");
+        Console.WriteLine("Quels champs voulez-vous inclure dans l'export ?");
+        Console.WriteLine("Tapez oui/non pour chaque champ :");
 
-        writer.WriteLine(string.Join(";", header));
+        Console.Write("Inclure le nom ? (oui/non) : ");
+        bool Nom = Console.ReadLine()?.Trim().ToLower() == "oui";
 
-        foreach (var r in liste)
+        Console.Write("Inclure la distance (km) ? (oui/non) : ");
+        bool Distance = Console.ReadLine()?.Trim().ToLower() == "oui";
+
+        Console.Write("Inclure la difficulté ? (oui/non) : ");
+        bool Difficulte = Console.ReadLine()?.Trim().ToLower() == "oui";
+
+        Console.Write("Inclure les coordonnées ? (oui/non) : ");
+        bool Coord = Console.ReadLine()?.Trim().ToLower() == "oui";
+
+        string fileName = $"export-{DateTime.Now:yyyyMMdd-HHmmss}.csv";
+        string currentDir = Directory.GetCurrentDirectory();
+        Console.WriteLine($"Dossier actuel: {currentDir}");
+
+        string exportPath = Path.Combine(currentDir, "Exports");
+        Console.WriteLine($"Création du dossier d'export : {exportPath}");
+
+        if (!Directory.Exists(exportPath))
         {
-            var row = new List<string>();
-            if (inclNom) row.Add(r.nom);
-            if (inclDistance) row.Add(r.distance_km.ToString());
-            if (inclDifficulte) row.Add(r.difficulte);
-            if (inclCoord) row.Add($"{r.geo_point_2d?.lat},{r.geo_point_2d?.lon}");
+            Directory.CreateDirectory(exportPath);
+            Console.WriteLine("Dossier Exports créé");
+        }
 
-            writer.WriteLine(string.Join(";", row));
+        string fullPath = Path.Combine(exportPath, fileName);
+        Console.WriteLine($"Chemin complet du fichier : {fullPath}");
+
+        using (var writer = new StreamWriter(fullPath))
+        {
+            var header = new List<string>();
+            if (Nom) header.Add("Nom");
+            if (Distance) header.Add("Distance_km");
+            if (Difficulte) header.Add("Difficulté");
+            if (Coord) header.Add("Latitude,Longitude");
+
+            writer.WriteLine(string.Join(";", header));
+
+            foreach (var r in liste)
+            {
+                var row = new List<string>();
+                if (Nom) row.Add(r.nom);
+                if (Distance) row.Add(r.distance_km.ToString());
+                if (Difficulte) row.Add(r.difficulte);
+                if (Coord) row.Add($"{r.geo_point_2d?.lat},{r.geo_point_2d?.lon}");
+
+                writer.WriteLine(string.Join(";", row));
+            }
+            Console.WriteLine("Données écrites");
+        }
+
+        Console.WriteLine($"Export terminé : {fullPath}");
+        if (File.Exists(fullPath))
+        {
+            Console.WriteLine("Le fichier a bien été créé");
+        }
+        else
+        {
+            Console.WriteLine("ERREUR : Le fichier n'a pas été créé");
         }
     }
-
-    Console.WriteLine($"\nExport terminé : {Path.Combine("Exports", fileName)}");
+    catch (Exception ex)
+    {
+        Console.WriteLine($"ERREUR lors de l'export : {ex.Message}");
+    }
 }
