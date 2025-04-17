@@ -1,0 +1,90 @@
+[
+  {
+    "geo_point_2d": {
+      "lon": 1.4760656381757933,
+      "lat": 43.586798584410964
+    },
+    "nom": "Premiers Bourgeons",
+    "date": "Avril 2025",
+    "distance_km": 16,
+    "difficulte": "*",
+    "plus_infos": "https://metropole.toulouse.fr/actualites/rando-velos-gratuites"
+  },
+  {
+    "geo_point_2d": {
+      "lon": 1.35648643068531,
+      "lat": 43.62864531147686
+    },
+    "nom": "La 200\u00e8me",
+    "date": "Juin 2024",
+    "distance_km": 48,
+    "difficulte": "***",
+    "plus_infos": "https://metropole.toulouse.fr/actualites/rando-velos-gratuites"
+  },
+  {
+    "geo_point_2d": {
+      "lon": 1.453721912905731,
+      "lat": 43.609120172326115
+    },
+    "nom": "D\u00e9part / Arriv\u00e9e",
+    "date": null,
+    "distance_km": 0,
+    "difficulte": null,
+    "plus_infos": null
+  },
+  {
+    "geo_point_2d": {
+      "lon": 1.4671046922389956,
+      "lat": 43.58978009573807
+    },
+    "nom": "La piste des g\u00e9ants",
+    "date": "Septembre 2024",
+    "distance_km": 18,
+    "difficulte": "**",
+    "plus_infos": "https://metropole.toulouse.fr/actualites/rando-velos-gratuites"
+  },
+  {
+    "geo_point_2d": {
+      "lon": 1.4519790734394935,
+      "lat": 43.61819016083532
+    },
+    "nom": "Jardins partag\u00e9s",
+    "date": "Mai 2024",
+    "distance_km": 17,
+    "difficulte": "*",
+    "plus_infos": "https://metropole.toulouse.fr/actualites/rando-velos-gratuites"
+  },
+  {
+    "geo_point_2d": {
+      "lon": 1.4712753227176283,
+      "lat": 43.63040873777039
+    },
+    "nom": "Le petit v\u00e9lo dans la prairie",
+    "date": "Avril 2024",
+    "distance_km": 19,
+    "difficulte": "**",
+    "plus_infos": "https://metropole.toulouse.fr/actualites/rando-velos-gratuites"
+  },
+  {
+    "geo_point_2d": {
+      "lon": 1.3881716925407415,
+      "lat": 43.61607793556459
+    },
+    "nom": "Piste d'envol",
+    "date": "Octobre 2024",
+    "distance_km": 32,
+    "difficulte": "***",
+    "plus_infos": "https://metropole.toulouse.fr/actualites/rando-velos-gratuites"
+  },
+  {
+    "date": "Novembre 2024",
+    "difficulte": "**",
+    "distance_km": 25,
+    "geo_point_2d": {
+      "lon": 1.4472147996682736,
+      "lat": 43.63722024278402
+    },
+    "nom": "Les Lacs",
+    "plus_infos": "https://metropole.toulouse.fr/actualites/rando-velos-gratuites"
+  }
+]
