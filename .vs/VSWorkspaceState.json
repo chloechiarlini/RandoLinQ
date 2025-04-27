@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\RandoLinQ"
+    "\\RandoLinQ",
+    "\\RandoLinQ\\Data"
   ],
-  "SelectedNode": "\\RandoLinQ\\Program.cs",
+  "SelectedNode": "\\RandoLinQ\\Data\\randonnees.json",
   "PreviewInSolutionExplorer": false
 }

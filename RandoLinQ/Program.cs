@@ -5,10 +5,10 @@ using System.Linq;
 using Newtonsoft.Json;
 using RandoLinQ;
 
-List<Trek> randos = new();
+List<Randonnee> randos = new();
 
-string json = File.ReadAllText(@$"{Directory.GetCurrentDirectory()}/Data/randonnees-velos.json");
-randos = JsonConvert.DeserializeObject<List<Trek>>(json) ?? new List<Trek>();
+string json = File.ReadAllText(@$"{Directory.GetCurrentDirectory()}/Data/randonnees.json");
+randos = JsonConvert.DeserializeObject<List<Randonnee>>(json) ?? new List<Randonnee>();
 
 while (true)
 {
@@ -20,12 +20,14 @@ while (true)
     Console.WriteLine("4. Trier par distance croissante");
     Console.WriteLine("5. Grouper par difficulté");
     Console.WriteLine("0. Quitter");
-    Console.Write("\nVotre choix : ");
-    string choix = Console.ReadLine()?.Trim();
+
+    Console.WriteLine();
+    Console.Write("Votre choix : ");
+    string? choix = Console.ReadLine()?.Trim();
 
     Console.Clear();
 
-    switch (choix)
+    switch (choix)  
     {
         case "1":
             ListerToutesLesRandos();
@@ -50,7 +52,8 @@ while (true)
             break;
     }
 
-    Console.WriteLine("\nAppuyez sur une touche pour revenir au menu...");
+    Console.WriteLine();
+    Console.WriteLine("Appuyez sur une touche pour revenir au menu...");
     Console.ReadKey();
 }
 
@@ -67,7 +70,8 @@ void ListerToutesLesRandos()
 
 void RechercherParDifficulte()
 {
-    Console.Write("Entrez la difficulté à rechercher (ex: *, **, ***, Facile, Moyen, Difficile) : ");
+    Console.Write("Entrez la difficulté à rechercher (ex: * pour facile, ** pour moyen et *** pour difficile) : ");
+    Console.WriteLine();
     string? diff = Console.ReadLine()?.Trim();
 
     var resultats = (from r in randos
@@ -136,8 +140,7 @@ void GrouperParDifficulte()
                  select r).ToList();
     DemanderExport(liste);
 }
-
-void DemanderExport(List<Trek> liste)
+void DemanderExport(List<Randonnee> liste)
 {
     if (liste == null || !liste.Any())
     {
@@ -145,51 +148,64 @@ void DemanderExport(List<Trek> liste)
         return;
     }
 
-    Console.WriteLine("\nSouhaitez-vous exporter ces randonnées ? (oui/non) : ");
-    if (Console.ReadLine()?.Trim().ToLower() == "oui")
+    Console.WriteLine();
+    Console.WriteLine("Souhaitez-vous exporter ces randonnées ? (oui/non) : ");
+    string reponse = GestionReponse();
+    if (reponse == "oui")
     {
         ProposerExport(liste);
     }
     else
     {
-        Console.WriteLine("Export annulé.");
+        Console.WriteLine("Pas d'export");
     }
 }
 
-void ProposerExport(List<Trek> liste)
+void ProposerExport(List<Randonnee> liste)
 {
     try
     {
-        Console.WriteLine("Quels champs voulez-vous inclure dans l'export ?");
-        Console.WriteLine("Tapez oui/non pour chaque champ :");
+        bool Nom = false, Distance = false, Difficulte = false, Coord = false;
 
-        Console.Write("Inclure le nom ? (oui/non) : ");
-        bool Nom = Console.ReadLine()?.Trim().ToLower() == "oui";
+        do
+        {
+            Console.WriteLine("Quels champs voulez-vous inclure dans l'export ?");
+            Console.WriteLine("Tapez oui/non pour chaque champ :");
 
-        Console.Write("Inclure la distance (km) ? (oui/non) : ");
-        bool Distance = Console.ReadLine()?.Trim().ToLower() == "oui";
+            Console.Write("Inclure le nom ? (oui/non) : ");
+            Nom = GestionReponse() == "oui";
 
-        Console.Write("Inclure la difficulté ? (oui/non) : ");
-        bool Difficulte = Console.ReadLine()?.Trim().ToLower() == "oui";
+            Console.Write("Inclure la distance (km) ? (oui/non) : ");
+            Distance = GestionReponse() == "oui";
 
-        Console.Write("Inclure les coordonnées ? (oui/non) : ");
-        bool Coord = Console.ReadLine()?.Trim().ToLower() == "oui";
+            Console.Write("Inclure la difficulté ? (oui/non) : ");
+            Difficulte = GestionReponse() == "oui";
+
+            Console.Write("Inclure les coordonnées ? (oui/non) : ");
+            Coord = GestionReponse() == "oui";
+
+            if (!Nom && !Distance && !Difficulte && !Coord)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Erreur : Vous devez sélectionner au moins un champ à exporter.");
+                Console.WriteLine("Veuillez refaire votre sélection.");
+                Console.WriteLine();
+            }
+
+        } while (!Nom && !Distance && !Difficulte && !Coord);
 
         string fileName = $"export-{DateTime.Now:yyyyMMdd-HHmmss}.csv";
         string currentDir = Directory.GetCurrentDirectory();
-        Console.WriteLine($"Dossier actuel: {currentDir}");
-
-        string exportPath = Path.Combine(currentDir, "Exports");
-        Console.WriteLine($"Création du dossier d'export : {exportPath}");
+        string exportPath = Path.Combine(Directory.GetParent(currentDir).Parent.Parent.FullName, "Exports");
 
         if (!Directory.Exists(exportPath))
         {
             Directory.CreateDirectory(exportPath);
+            Console.WriteLine();
             Console.WriteLine("Dossier Exports créé");
         }
 
         string fullPath = Path.Combine(exportPath, fileName);
-        Console.WriteLine($"Chemin complet du fichier : {fullPath}");
 
         using (var writer = new StreamWriter(fullPath))
         {
@@ -211,21 +227,34 @@ void ProposerExport(List<Trek> liste)
 
                 writer.WriteLine(string.Join(";", row));
             }
-            Console.WriteLine("Données écrites");
         }
 
-        Console.WriteLine($"Export terminé : {fullPath}");
         if (File.Exists(fullPath))
         {
-            Console.WriteLine("Le fichier a bien été créé");
+            Console.WriteLine();
+            Console.WriteLine("Le fichier a bien été créé.");
         }
         else
         {
-            Console.WriteLine("ERREUR : Le fichier n'a pas été créé");
+            Console.WriteLine();
+            Console.WriteLine("ERREUR : Le fichier n'a pas été créé.");
         }
     }
     catch (Exception ex)
     {
         Console.WriteLine($"ERREUR lors de l'export : {ex.Message}");
+    }
+}
+
+string GestionReponse()
+{
+    while (true)
+    {
+        string? input = Console.ReadLine()?.Trim().ToLower();
+        if (input == "oui" || input == "non")
+        {
+            return input;
+        }
+        Console.WriteLine("Entrée invalide. Veuillez répondre par 'oui' ou 'non' : ");
     }
 }

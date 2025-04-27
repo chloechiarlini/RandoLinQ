@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\queen\\source\\repos\\RandoLinQ\\RandoLinQ\\RandoLinQ.csproj": {}
+    "C:\\Users\\queen\\Source\\Repos\\RandoLinQ\\RandoLinQ\\RandoLinQ.csproj": {}
   },
   "projects": {
-    "C:\\Users\\queen\\source\\repos\\RandoLinQ\\RandoLinQ\\RandoLinQ.csproj": {
+    "C:\\Users\\queen\\Source\\Repos\\RandoLinQ\\RandoLinQ\\RandoLinQ.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\queen\\source\\repos\\RandoLinQ\\RandoLinQ\\RandoLinQ.csproj",
+        "projectUniqueName": "C:\\Users\\queen\\Source\\Repos\\RandoLinQ\\RandoLinQ\\RandoLinQ.csproj",
         "projectName": "RandoLinQ",
-        "projectPath": "C:\\Users\\queen\\source\\repos\\RandoLinQ\\RandoLinQ\\RandoLinQ.csproj",
+        "projectPath": "C:\\Users\\queen\\Source\\Repos\\RandoLinQ\\RandoLinQ\\RandoLinQ.csproj",
         "packagesPath": "C:\\Users\\queen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\queen\\source\\repos\\RandoLinQ\\RandoLinQ\\obj\\",
+        "outputPath": "C:\\Users\\queen\\Source\\Repos\\RandoLinQ\\RandoLinQ\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

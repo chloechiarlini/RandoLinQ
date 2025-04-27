@@ -12,7 +12,7 @@ namespace RandoLinQ
         public double lat { get; set; }
     }
 
-    public class Trek
+    public class Randonnee
     {
         public GeoPoint geo_point_2d { get; set; }
         public string nom { get; set; }

@@ -53,3 +53,5 @@ TestResults/
 coverage.json
 coverage.info
 coverage.xml 
+
+Exports/

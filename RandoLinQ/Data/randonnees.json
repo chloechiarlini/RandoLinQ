@@ -1,0 +1,92 @@
+[
+  {
+    "geo_point_2d": {
+      "lon": 6.8650,
+      "lat": 45.8326
+    },
+    "nom": "Tour du Mont Blanc",
+    "distance_km": 170,
+    "difficulte": "****"
+  },
+  {
+    "geo_point_2d": {
+      "lon": -0.7376,
+      "lat": 43.1295
+    },
+    "nom": "Parc National des Pyrénées - Lac de Gaube",
+    "distance_km": 6,
+    "difficulte": "**"
+  },
+  {
+    "geo_point_2d": {
+      "lon": 5.4928,
+      "lat": 44.8856
+    },
+    "nom": "Parc National des Écrins - Glacier Blanc",
+    "distance_km": 11,
+    "difficulte": "***"
+  },
+  {
+    "geo_point_2d": {
+      "lon": 6.4006,
+      "lat": 44.9251
+    },
+    "nom": "Lac de Serre-Ponçon",
+    "distance_km": 12,
+    "difficulte": "**"
+  },
+  {
+    "geo_point_2d": {
+      "lon": 7.2645,
+      "lat": 43.7102
+    },
+    "nom": "Sentier du Littoral - Cap d'Antibes",
+    "distance_km": 5,
+    "difficulte": "*"
+  },
+  {
+    "geo_point_2d": {
+      "lon": 5.2650,
+      "lat": 44.3837
+    },
+    "nom": "Vercors - Gorges d'Omblèze",
+    "distance_km": 14,
+    "difficulte": "**"
+  },
+  {
+    "geo_point_2d": {
+      "lon": 1.4900,
+      "lat": 42.8110
+    },
+    "nom": "Cirque de Gavarnie",
+    "distance_km": 8,
+    "difficulte": "**"
+  },
+  {
+    "geo_point_2d": {
+      "lon": 2.7700,
+      "lat": 42.5440
+    },
+    "nom": "Canigou - Par le refuge des Cortalets",
+    "distance_km": 19,
+    "difficulte": "***"
+  },
+  {
+    "geo_point_2d": {
+      "lon": 6.3294,
+      "lat": 44.6458
+    },
+    "nom": "Col de la Croix de Fer",
+    "distance_km": 13,
+    "difficulte": "***"
+  },
+  {
+    "geo_point_2d": {
+      "lon": 1.1053,
+      "lat": 43.7957
+    },
+    "nom": "Forêt de Bouconne",
+    "distance_km": 10,
+    "difficulte": "*"
+  }
+]
